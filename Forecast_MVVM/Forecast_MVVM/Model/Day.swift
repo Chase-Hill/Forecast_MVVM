@@ -30,14 +30,12 @@ struct Day: Decodable {
     let validDate: String
     let weather: Weather
 }
-    
+
 struct Weather: Decodable {
     private enum CodingKeys: String, CodingKey {
         case description
         case iconString = "icon"
-    
     }
     let description: String
     let iconString: String
-    
 }

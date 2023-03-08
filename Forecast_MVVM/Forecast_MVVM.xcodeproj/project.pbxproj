@@ -13,10 +13,11 @@
 		41978F4C27B9C26E001CB2C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41978F4B27B9C26E001CB2C0 /* Assets.xcassets */; };
 		41978F4F27B9C26E001CB2C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41978F4D27B9C26E001CB2C0 /* LaunchScreen.storyboard */; };
 		41978F6927B9CDCC001CB2C0 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41978F6827B9CDCC001CB2C0 /* Day.swift */; };
-		41978F6B27B9CDF2001CB2C0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41978F6A27B9CDF2001CB2C0 /* NetworkingController.swift */; };
 		41978F6D27B9CE70001CB2C0 /* ResultError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41978F6C27B9CE70001CB2C0 /* ResultError.swift */; };
 		41978F6F27B9CF0A001CB2C0 /* DayForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41978F6E27B9CF0A001CB2C0 /* DayForecastTableViewCell.swift */; };
 		41978F7127B9CF46001CB2C0 /* DayDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41978F7027B9CF46001CB2C0 /* DayDetailsViewController.swift */; };
+		AFDA41B929B920C4007AF208 /* DayDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA41B829B920C4007AF208 /* DayDetailViewModel.swift */; };
+		AFDA41BB29B92A44007AF208 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDA41BA29B92A44007AF208 /* NetworkingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +29,11 @@
 		41978F4E27B9C26E001CB2C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41978F5027B9C26E001CB2C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41978F6827B9CDCC001CB2C0 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		41978F6A27B9CDF2001CB2C0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		41978F6C27B9CE70001CB2C0 /* ResultError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultError.swift; sourceTree = "<group>"; };
 		41978F6E27B9CF0A001CB2C0 /* DayForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayForecastTableViewCell.swift; sourceTree = "<group>"; };
 		41978F7027B9CF46001CB2C0 /* DayDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailsViewController.swift; sourceTree = "<group>"; };
+		AFDA41B829B920C4007AF208 /* DayDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailViewModel.swift; sourceTree = "<group>"; };
+		AFDA41BA29B92A44007AF208 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,12 +66,11 @@
 		41978F4127B9C26C001CB2C0 /* Forecast_MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				41978F5627B9C2B5001CB2C0 /* Supporting Files */,
+				AFDA41B729B91FAD007AF208 /* Storyboard */,
 				41978F6527B9CDA8001CB2C0 /* Controller */,
 				41978F6427B9CDA1001CB2C0 /* Model */,
 				41978F6727B9CDB5001CB2C0 /* View */,
-				41978F5627B9C2B5001CB2C0 /* Supporting Files */,
-				41978F4827B9C26C001CB2C0 /* Main.storyboard */,
-				41978F4D27B9C26E001CB2C0 /* LaunchScreen.storyboard */,
 			);
 			path = Forecast_MVVM;
 			sourceTree = "<group>";
@@ -96,8 +97,8 @@
 		41978F6527B9CDA8001CB2C0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				41978F6A27B9CDF2001CB2C0 /* NetworkingController.swift */,
 				41978F6C27B9CE70001CB2C0 /* ResultError.swift */,
+				AFDA41BA29B92A44007AF208 /* NetworkingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -107,8 +108,18 @@
 			children = (
 				41978F6E27B9CF0A001CB2C0 /* DayForecastTableViewCell.swift */,
 				41978F7027B9CF46001CB2C0 /* DayDetailsViewController.swift */,
+				AFDA41B829B920C4007AF208 /* DayDetailViewModel.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AFDA41B729B91FAD007AF208 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				41978F4827B9C26C001CB2C0 /* Main.storyboard */,
+				41978F4D27B9C26E001CB2C0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,13 +193,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFDA41B929B920C4007AF208 /* DayDetailViewModel.swift in Sources */,
+				AFDA41BB29B92A44007AF208 /* NetworkingController.swift in Sources */,
 				41978F6F27B9CF0A001CB2C0 /* DayForecastTableViewCell.swift in Sources */,
 				41978F6D27B9CE70001CB2C0 /* ResultError.swift in Sources */,
 				41978F4327B9C26C001CB2C0 /* AppDelegate.swift in Sources */,
 				41978F7127B9CF46001CB2C0 /* DayDetailsViewController.swift in Sources */,
 				41978F6927B9CDCC001CB2C0 /* Day.swift in Sources */,
 				41978F4527B9C26C001CB2C0 /* SceneDelegate.swift in Sources */,
-				41978F6B27B9CDF2001CB2C0 /* NetworkingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
