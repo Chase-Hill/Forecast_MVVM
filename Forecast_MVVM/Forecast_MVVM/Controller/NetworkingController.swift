@@ -7,44 +7,33 @@
 
 import Foundation
 
-class NetworkingContoller {
-    
-    private static let baseURLString = "https://api.weatherbit.io"
-    
-    static func fetchDays(completion: @escaping (Result<TopLevelDictionary, NetworkError>) -> Void) {
-        guard let baseURL = URL(string:baseURLString) else {return}
+protocol NetworkingControllerServiceable {
+    func fetchDays(with endpoint: DayEndpoint, completion: @escaping (Result <TopLevelDictionary, NetworkError>) -> Void)
+}
 
-
-        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-        urlComponents?.path = "/v2.0/forecast/daily"
+struct NetworkingContoller: NetworkingControllerServiceable {
+    
+    // MARK: - Properties
+    let apiProvider = APIDataProvider()
         
-        let apiQuery = URLQueryItem(name: "key", value: "8503276d5f49474f953722fa0a8e7ef8")
-        let cityQuery = URLQueryItem(name: "city", value:"Canton")
-        let unitsQuery = URLQueryItem(name: "units", value: "I")
-        urlComponents?.queryItems = [apiQuery,cityQuery,unitsQuery]
+    // MARK: - Functions
+    func fetchDays(with endpoint: DayEndpoint, completion: @escaping (Result <TopLevelDictionary, NetworkError>) -> Void) {
+        guard let finalURL = endpoint.fullURL else { return }
         
-        guard let finalURL = urlComponents?.url else {return}
-        print(finalURL)
-        
-        URLSession.shared.dataTask(with: finalURL) { dayData, _, error in
-            if let error = error {
-                print("There was an error fetching the data. The url is \(finalURL), the error is \(error.localizedDescription)")
-                completion(.failure(.invalidURL))
+        let request = URLRequest(url: finalURL)
+        apiProvider.perform(request) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let topLevelDictionary = try JSONDecoder().decode(TopLevelDictionary.self, from: data)
+                    completion(.success(topLevelDictionary))
+                } catch {
+                    print("Error in Do/Try/Catch: \(error.localizedDescription)")
+                    completion(.failure(.unableToDecode))
+                }
+            case .failure(let error):
+                completion(.failure(.thrownError(error)))
             }
-            
-            guard let data = dayData else {
-                print("There was an error recieveing the data!")
-                completion(.failure(.unableToDecode))
-                return
-            }
-            
-            do {
-                let topLevelDictionary = try JSONDecoder().decode(TopLevelDictionary.self, from: data)
-                completion(.success(topLevelDictionary))
-            } catch {
-                print("Error in Do/Try/Catch: \(error.localizedDescription)")
-                completion(.failure(.unableToDecode))
-            }
-        }.resume()
+        }
     }
 }

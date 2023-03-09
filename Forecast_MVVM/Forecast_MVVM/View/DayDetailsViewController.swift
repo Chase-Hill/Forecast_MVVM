@@ -24,13 +24,12 @@ class DayDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = DayDetailViewModel(delegate: self)
-        dayForcastTableView.delegate = self
         dayForcastTableView.dataSource = self
     }
 }
 
 //MARK: - Extenstions
-extension DayDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+extension DayDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.days.count
     }
